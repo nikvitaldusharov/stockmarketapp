@@ -42,7 +42,7 @@ export class SignalrService {
     this.hubConnection.on('GotRealPrices', (data: any) => { 
       this.realPrice.next(data);
     });
-    this.hubConnection.on('GotStocks', (data: any) => { 
+    this.hubConnection.on('GotStocks', (data: any) => { //USE THIS!!
       this.stocks.next(data);
     });
   }

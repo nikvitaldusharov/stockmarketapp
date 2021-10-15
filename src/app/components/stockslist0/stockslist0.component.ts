@@ -16,6 +16,14 @@ export class StockslistComponent0 implements OnInit {
   private combinedPrices: Observable<any> = EMPTY;
 
   constructor(private http: HttpClient, private signalrSvc: SignalrService) {
+    this.signalrSvc.stocks$.pipe() //concatMap
+
+    // http://localhost:4200/stock-list0
+    //добавить к arrayOfStocks
+    //запросить real price  this.http.post<Array<Price>>(`${environment.baseUrl}real-prices`, ids);
+    //request predicted price this.http.post<Array<Price>>(`${environment.baseUrl}predicted-prices`, ids);
+    //stock.predictedToRealPrice = stock.predictedPrice / stock.realPrice;
+    // to send data - https://webapplication120211011215142.azurewebsites.net/stocks
   }
 
   ngOnInit(): void {
