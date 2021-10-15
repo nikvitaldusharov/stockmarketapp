@@ -19,40 +19,7 @@ export class StockslistComponent0 implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.signalrSvc.stocks$.pipe(
-      map((stocks: Array<Stock>) => {
-        this.arrayOfStocks = this.arrayOfStocks.concat(stocks);
-        return stocks.map(x => x.id);
-      }),
-      concatMap((ids: Array<string>) => {
-        return this.http.post<Array<Price>>(`${environment.baseUrl}real-prices`, ids);
-      }),
-      map((prices: Array<Price>) => {
-        const ids = [];
-        for(const price of prices) {
-          ids.push(price.id);
-          const stock = this.arrayOfStocks.find(x => x.id === price.id);
-          if (stock) {
-            stock.realPrice = price.value;
-          }
-        }
-        return ids;
-      }),
-      concatMap((ids: Array<string>) => {
-        return this.http.post<Array<Price>>(`${environment.baseUrl}predicted-prices`, ids);
-      })
-    ).subscribe((predictedPrices: Array<Price>) => {
-      for(const price of predictedPrices) {
-        const stock = this.arrayOfStocks.find(x => x.id === price.id);
-        if (stock) {
-          stock.predictedPrice = price.value;
-          if(stock.realPrice && stock.predictedPrice) {
-            stock.predictedToRealPrice = stock.predictedPrice / stock.realPrice;
-          }
-        }
-      }
-    });
+    //TODO
   }
 
   arrayOfStocks: Array<Stock> = [];

@@ -17,45 +17,7 @@ export class StockslistComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // this.httpClient.get(`${environment.baseUrl}stocks`).pipe(
-    //   tap((stocks: any) => this.arrayOfStocks = stocks),
-    //   switchMap((stocks: any) => this.httpClient.post(`${environment.baseUrl}prices`, {
-    //     ids: stocks.map((x: any) => x.id)
-    //   }))
-    // ).subscribe((prices: any) => {
-    //   this.arrayOfStocks.forEach(stock => {
-    //     stock.predictedPrice = prices[stock.id].predictedPrice;
-    //     stock.realPrice = prices[stock.id].realPrice;
-    //     stock.predictedToRealPrice = stock.predictedPrice/stock.realPrice;
-    //   });
-    // });
-
-    this.combinedPrices = combineLatest([this.signalrSvc.realPrice$, this.signalrSvc.predictedPrice$]) as Observable<any>;
-    this.combinedPrices.pipe(map(([realPrice, predictedPrice]: Array<Array<Price>>) => {
-      if (!realPrice?.length) {
-        return [];
-      }
-      const combined: any = {};
-      realPrice.forEach(rp => {
-        const pp = predictedPrice.find(x => x.id === rp.id);
-        combined[rp.id] = {
-          real: rp.value,
-          predicted: pp?.value ? pp.value : rp.value
-        };
-      });
-      return combined;
-    })).subscribe((combined: any) => {
-      for(const stock of this.arrayOfStocks) {
-        const prices = combined[stock.id];
-        if (prices) {
-          stock.predictedPrice = prices.predicted;
-          stock.realPrice = prices.real;
-          stock.predictedToRealPrice = prices.predicted/prices.real;
-        }
-      }
-      this.arrayOfStocks = [...this.arrayOfStocks];
-    });
+    //TODO
   }
 
   arrayOfStocks: Array<Stock> = [
