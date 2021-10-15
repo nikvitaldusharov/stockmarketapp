@@ -1,0 +1,15 @@
+<div class="header"><h1>Stock list</h1></div>
+<div class="card">
+    <div class="container">
+        <span style="font-weight: 550; padding-bottom: 10px;">Name</span>
+        <span style="font-weight: 550; padding-bottom: 10px;">Real price</span>
+        <span style="font-weight: 550; padding-bottom: 10px;">Predicted price</span>
+        <span style="font-weight: 550; padding-bottom: 10px;">Relation</span>
+        <ng-container *ngFor="let stock of arrayOfStocks">
+            <span class="item" style="font-style: italic;">{{stock.name}}</span>
+            <span class="item">{{stock.realPrice | number}}</span>
+            <span class="item">{{stock.predictedPrice | number}}</span>
+            <span class="item">{{stock.predictedToRealPrice | number}}</span>
+        </ng-container>
+    </div>
+</div>
