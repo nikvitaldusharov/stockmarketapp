@@ -5,6 +5,7 @@ import { } from 'rxjs/operators';
 import * as signalR from '@microsoft/signalr';
 import { Stock } from '../models/stock';
 import { environment } from 'src/environments/environment';
+import { HttpTransportType } from '@microsoft/signalr';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class SignalrService {
   initSignalr() {
     try {
       this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${environment.baseUrl}stockHub`)
+      .withUrl(`${environment.baseUrl}stockHub`, HttpTransportType.WebSockets)
       .withAutomaticReconnect()
       .configureLogging(signalR.LogLevel.Information)
       .build();

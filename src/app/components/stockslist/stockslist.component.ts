@@ -18,6 +18,9 @@ export class StockslistComponent implements OnInit {
 
   ngOnInit(): void {
     //TODO
+    //combine real price with predicted one this.signalrSvc.realPrice$ this.signalrSvc.predictedPrice$
+    //calculate relation of predicted price to real one
+    //render the result
   }
 
   arrayOfStocks: Array<Stock> = [
